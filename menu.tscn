@@ -1,0 +1,214 @@
+[gd_scene load_steps=13 format=3 uid="uid://cjf0wsk6opcwo"]
+
+[ext_resource type="Texture2D" uid="uid://gc1pqdyqiot" path="res://assets/FullWhite.png" id="1_mae5d"]
+[ext_resource type="Script" uid="uid://8dpq3cyj5hr" path="res://scripts/menu.gd" id="1_ytr4m"]
+[ext_resource type="PackedScene" uid="uid://b58vatmcidval" path="res://scenes/moving_bg.tscn" id="2_4hy44"]
+[ext_resource type="PackedScene" uid="uid://b84j7el2tyoni" path="res://scenes/moving_floor.tscn" id="3_ytr4m"]
+[ext_resource type="PackedScene" uid="uid://l1tuxy3pgnce" path="res://scenes/bird.tscn" id="4_4hy44"]
+[ext_resource type="Texture2D" uid="uid://cw2wi26srqv65" path="res://assets/birds/Bird-Default.png" id="6_l48gv"]
+[ext_resource type="Texture2D" uid="uid://dlt5heghasjtk" path="res://assets/hats/Baseball-Hat.png" id="7_ecwwl"]
+[ext_resource type="Script" uid="uid://cbfoka4hjampr" path="res://scripts/mobile_scroll_list.gd" id="8_kk3ma"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4hy44"]
+font_size = 101
+outline_size = 50
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kk3ma"]
+font_size = 26
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kk3ma"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nrnbx"]
+font_size = 26
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_ytr4m")
+
+[node name="FullWhite" type="Sprite2D" parent="."]
+modulate = Color(0.478431, 1, 1, 1)
+position = Vector2(8.99998, -161.25)
+scale = Vector2(73.25, 85.7812)
+texture = ExtResource("1_mae5d")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="MovingBG2" parent="." instance=ExtResource("2_4hy44")]
+position = Vector2(-30, 534)
+
+[node name="MovingBG" parent="." instance=ExtResource("2_4hy44")]
+position = Vector2(930, 534)
+
+[node name="MovingFloor" parent="." instance=ExtResource("3_ytr4m")]
+position = Vector2(480, 726)
+
+[node name="MovingFloor2" parent="." instance=ExtResource("3_ytr4m")]
+position = Vector2(-480, 726)
+
+[node name="Bird" parent="." instance=ExtResource("4_4hy44")]
+position = Vector2(0, -223)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -321.5
+offset_top = 130.0
+offset_right = 321.5
+offset_bottom = 268.0
+grow_horizontal = 2
+text = "Flapping Bird"
+label_settings = SubResource("LabelSettings_4hy44")
+
+[node name="MainPanel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_right = 253.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/MainPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Play"
+
+[node name="Shop" type="Button" parent="CanvasLayer/MainPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Shop"
+
+[node name="ShopPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -367.0
+offset_top = -125.0
+offset_right = 367.0
+offset_bottom = 723.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyLabel" type="Label" parent="CanvasLayer/ShopPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -629.0
+offset_right = -6.0
+offset_bottom = 65.0
+grow_horizontal = 0
+text = "Money: 500"
+label_settings = SubResource("LabelSettings_kk3ma")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ShopPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabBar" type="TabBar" parent="CanvasLayer/ShopPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 51
+current_tab = 0
+tab_alignment = 1
+tab_count = 2
+tab_0/title = "Birds"
+tab_0/icon = ExtResource("6_l48gv")
+tab_1/title = "Hats"
+tab_1/icon = ExtResource("7_ecwwl")
+
+[node name="ItemListBird" type="ItemList" parent="CanvasLayer/ShopPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+max_columns = 3
+fixed_column_width = 203
+icon_scale = 12.51
+script = ExtResource("8_kk3ma")
+
+[node name="ItemListHat" type="ItemList" parent="CanvasLayer/ShopPanel/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+max_columns = 3
+fixed_column_width = 203
+icon_scale = 12.51
+script = ExtResource("8_kk3ma")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ShopPanel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EquipButton" type="Button" parent="CanvasLayer/ShopPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Equip"
+
+[node name="BuyButton" type="Button" parent="CanvasLayer/ShopPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Buy - 300 Money"
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/ShopPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Close"
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -91.0
+offset_right = 309.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kk3ma")
+
+[node name="MadeBy" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Made by: Csani10
+https://csani10.itch.io"
+label_settings = SubResource("LabelSettings_nrnbx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/MainPanel/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainPanel/VBoxContainer/Shop" to="." method="_on_shop_pressed"]
+[connection signal="tab_changed" from="CanvasLayer/ShopPanel/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
+[connection signal="pressed" from="CanvasLayer/ShopPanel/VBoxContainer/HBoxContainer/EquipButton" to="." method="_on_equip_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShopPanel/VBoxContainer/HBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShopPanel/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Panel" to="." method="_on_panel_mouse_exited"]

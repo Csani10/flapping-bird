@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://l1tuxy3pgnce"]
+
+[ext_resource type="Script" uid="uid://b1af1yyhdbhes" path="res://scripts/bird.gd" id="1_kqhkv"]
+[ext_resource type="Texture2D" uid="uid://d171r8q0q47vf" path="res://assets/birds/Bird-Blue.png" id="2_3po83"]
+[ext_resource type="Texture2D" uid="uid://dd8g8yshu8tw8" path="res://assets/hats/Beanie-Hat.png" id="3_hq4t0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3po83"]
+radius = 52.0096
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hq4t0"]
+radius = 54.037
+
+[node name="Bird" type="CharacterBody2D"]
+script = ExtResource("1_kqhkv")
+
+[node name="SpriteMid" type="Node2D" parent="."]
+position = Vector2(0, 14)
+
+[node name="BirdSprite" type="Sprite2D" parent="SpriteMid"]
+position = Vector2(0, -14)
+scale = Vector2(9, 9)
+texture = ExtResource("2_3po83")
+
+[node name="HatSprite" type="Sprite2D" parent="SpriteMid"]
+position = Vector2(0, -122)
+scale = Vector2(9, 9)
+texture = ExtResource("3_hq4t0")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_3po83")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+position = Vector2(0, 14)
+shape = SubResource("CircleShape2D_hq4t0")
+
+[connection signal="area_entered" from="Area" to="." method="_on_area_area_entered"]
+[connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]

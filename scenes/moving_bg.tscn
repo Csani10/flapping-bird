@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b58vatmcidval"]
+
+[ext_resource type="Script" uid="uid://bno4pcoqidcut" path="res://scripts/moving_bg.gd" id="1_fajyy"]
+[ext_resource type="Texture2D" uid="uid://bmae0g8x2k67b" path="res://assets/Bg.png" id="2_rywhk"]
+
+[node name="MovingBG" type="Node2D"]
+script = ExtResource("1_fajyy")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(-240, -51)
+scale = Vector2(10, 10)
+texture = ExtResource("2_rywhk")
+
+[node name="Bg2" type="Sprite2D" parent="."]
+position = Vector2(240, -51)
+scale = Vector2(10, 10)
+texture = ExtResource("2_rywhk")

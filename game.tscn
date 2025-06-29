@@ -1,0 +1,197 @@
+[gd_scene load_steps=13 format=3 uid="uid://cyqiepx2qvv2d"]
+
+[ext_resource type="Script" uid="uid://cpcp1si8hjeyj" path="res://scripts/pipe_spawner.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://c6ljq13rcchp1" path="res://scripts/game.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://l1tuxy3pgnce" path="res://scenes/bird.tscn" id="2_feb5d"]
+[ext_resource type="Texture2D" uid="uid://gc1pqdyqiot" path="res://assets/FullWhite.png" id="2_ryrav"]
+[ext_resource type="PackedScene" uid="uid://b84j7el2tyoni" path="res://scenes/moving_floor.tscn" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://b58vatmcidval" path="res://scenes/moving_bg.tscn" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://cwum5f50yr2m6" path="res://scripts/game_ui.gd" id="7_eow3j"]
+[ext_resource type="Texture2D" uid="uid://dssd82y0n2jhv" path="res://assets/medals/Bronze.png" id="8_j5wjh"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e2o6t"]
+normal = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ryrav"]
+font_size = 166
+outline_size = 50
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_eow3j"]
+font_size = 76
+outline_size = 50
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j5wjh"]
+font_size = 56
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_feb5d")
+
+[node name="FullWhite" type="Sprite2D" parent="."]
+modulate = Color(0.478431, 1, 1, 1)
+position = Vector2(8.99998, -161.25)
+scale = Vector2(73.25, 85.7812)
+texture = ExtResource("2_ryrav")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="WorldBorderTop" type="StaticBody2D" parent="."]
+position = Vector2(0, -780)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorderTop"]
+shape = SubResource("WorldBoundaryShape2D_e2o6t")
+
+[node name="MovingBG2" parent="." instance=ExtResource("5_7jktm")]
+position = Vector2(-30, 534)
+
+[node name="MovingBG" parent="." instance=ExtResource("5_7jktm")]
+position = Vector2(930, 534)
+
+[node name="PipeSpawner" type="Node2D" parent="."]
+position = Vector2(650, 0)
+script = ExtResource("1_e2o6t")
+
+[node name="MovingFloor" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(480, 726)
+
+[node name="MovingFloor2" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(-480, 726)
+
+[node name="Bird" parent="." instance=ExtResource("2_feb5d")]
+position = Vector2(0, -223)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("7_eow3j")
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "1"
+label_settings = SubResource("LabelSettings_ryrav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressToStart" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -52.5
+offset_right = 252.0
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press To Start"
+label_settings = SubResource("LabelSettings_eow3j")
+
+[node name="EndPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -350.0
+offset_right = 370.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Medal" type="TextureRect" parent="CanvasLayer/EndPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 41.0
+offset_top = -160.0
+offset_right = 81.0
+offset_bottom = -120.0
+grow_vertical = 2
+scale = Vector2(5, 5)
+texture = ExtResource("8_j5wjh")
+expand_mode = 1
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/EndPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -225.0
+offset_right = -165.0
+offset_bottom = -68.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Score:
+1"
+label_settings = SubResource("LabelSettings_j5wjh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScoreLabel" type="Label" parent="CanvasLayer/EndPanel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -462.0
+offset_top = -44.0
+offset_right = -22.0
+offset_bottom = 113.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "New High Score:
+1"
+label_settings = SubResource("LabelSettings_j5wjh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="CanvasLayer/EndPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -216.0
+offset_right = 164.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 61
+text = "Restart"
+
+[node name="Menu" type="Button" parent="CanvasLayer/EndPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = -102.0
+offset_right = 162.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 61
+text = "Menu"
+
+[connection signal="pressed" from="CanvasLayer/EndPanel/Restart" to="CanvasLayer" method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/EndPanel/Menu" to="CanvasLayer" method="_on_menu_pressed"]

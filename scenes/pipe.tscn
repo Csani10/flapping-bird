@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxeqtumgsfohx"]
+
+[ext_resource type="Script" uid="uid://0kiof0cepe31" path="res://scripts/pipe.gd" id="1_arayy"]
+[ext_resource type="Texture2D" uid="uid://wnwjhnhdh0ma" path="res://assets/PipeLong.png" id="1_bepn3"]
+[ext_resource type="Texture2D" uid="uid://cmos8r5qdko60" path="res://assets/PipeTop.png" id="2_78010"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78010"]
+size = Vector2(160, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arayy"]
+size = Vector2(140, 1732)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p0di"]
+size = Vector2(58, 320)
+
+[node name="Pipe" type="StaticBody2D"]
+script = ExtResource("1_arayy")
+
+[node name="Bottom" type="Node2D" parent="."]
+position = Vector2(0, 188)
+
+[node name="PipeLong" type="Sprite2D" parent="Bottom"]
+position = Vector2(0, 940)
+scale = Vector2(10, 103.5)
+texture = ExtResource("1_bepn3")
+
+[node name="PipeTop" type="Sprite2D" parent="Bottom"]
+position = Vector2(0, 56)
+scale = Vector2(10, 10)
+texture = ExtResource("2_78010")
+
+[node name="Top" type="Node2D" parent="."]
+position = Vector2(0, -188)
+rotation = 3.14159
+
+[node name="PipeLong" type="Sprite2D" parent="Top"]
+position = Vector2(0, 940)
+scale = Vector2(10, 103.5)
+texture = ExtResource("1_bepn3")
+
+[node name="PipeTop" type="Sprite2D" parent="Top"]
+position = Vector2(0, 56)
+scale = Vector2(10, 10)
+texture = ExtResource("2_78010")
+
+[node name="Top3" type="CollisionShape2D" parent="."]
+position = Vector2(0, 194)
+shape = SubResource("RectangleShape2D_78010")
+
+[node name="Bottom3" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1090)
+shape = SubResource("RectangleShape2D_arayy")
+
+[node name="Bottom2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1090)
+shape = SubResource("RectangleShape2D_arayy")
+
+[node name="Top2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -194)
+shape = SubResource("RectangleShape2D_78010")
+
+[node name="PointArea" type="Area2D" parent="."]
+
+[node name="Coll" type="CollisionShape2D" parent="PointArea"]
+shape = SubResource("RectangleShape2D_8p0di")

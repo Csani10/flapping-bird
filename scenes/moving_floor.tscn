@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b84j7el2tyoni"]
+
+[ext_resource type="Texture2D" uid="uid://h4dq24fcvjxm" path="res://assets/Floor.png" id="1_kn1sf"]
+[ext_resource type="Script" uid="uid://dimn2u7062yyx" path="res://scripts/moving_floor.gd" id="1_qeffn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kn1sf"]
+size = Vector2(960, 160)
+
+[node name="MovingFloor" type="StaticBody2D"]
+script = ExtResource("1_qeffn")
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(-240, -6)
+scale = Vector2(10, 10)
+texture = ExtResource("1_kn1sf")
+
+[node name="Floor2" type="Sprite2D" parent="."]
+position = Vector2(240, -6)
+scale = Vector2(10, 10)
+texture = ExtResource("1_kn1sf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_kn1sf")
